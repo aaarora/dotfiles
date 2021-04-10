@@ -8,7 +8,6 @@ alias analysis='source /home/users/aaarora/pyEnv/analysis/bin/activate; export P
 alias jupnb='jupyter notebook --no-browser --port=9000'
 alias niceplot='php ~/util/niceplots/index.php > ./index.html'
 alias getp='kubectl get pods -n osg-gil -o wide'
-export LANG="C.UTF-8"
 
 #I'm Stupid
 alias sl='ls'
