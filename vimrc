@@ -1,24 +1,26 @@
 " Vim with all enhancements
-source $VIMRUNTIME/vimrc_example.vim
 
 syntax on
 set nocompatible
 set hidden
 
 set noerrorbells visualbell t_vb=
+set t_u7=
+set clipboard=unnamedplus
 
 set backspace=indent,eol,start
 
 set nowrap
 set expandtab
-set shiftwidth=4
-set tabstop=4
-set smarttab
-set ignorecase
-set shiftround
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set autoindent
 set copyindent
 set smartindent
+set smarttab
+set ignorecase
+set shiftround
 set showmatch
 set number
 
@@ -30,6 +32,9 @@ set noswapfile
 set noundofile
 
 colorscheme slate
+
+vnoremap <silent> # :s/^/#/<cr>:noh<cr>
+vnoremap <silent> -# :s/^#//<cr>:noh<cr>
 
 " Use the internal diff if available.
 if &diffopt !~# 'internal'
