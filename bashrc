@@ -3,9 +3,24 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+# ssh-agent
+eval $(ssh-agent -s) &> /dev/null
+find ~/.ssh/ -type f -exec grep -l "PRIVATE" {} \; | xargs ssh-add &> /dev/null
+trap "kill $SSH_AGENT_PID" 0
+
+# ssh aliases
+alias osg-l='ssh aaarora@osg-ligo-1.t2.ucsd.edu'
+alias t12='ssh aaarora@test-012.t2.ucsd.edu'
+alias t07='ssh aaarora@test-007.t2.ucsd.edu'
+alias uaf-10='ssh aaarora@uaf-10.t2.ucsd.edu'
+alias uaf-8='ssh aaarora@uaf-8.t2.ucsd.edu'
+alias uaf-7='ssh aaarora@uaf-7.t2.ucsd.edu'
+alias uaf-1='ssh -L 9000:localhost:9000 aaarora@uaf-1.t2.ucsd.edu'
+
 #Personal
 alias jupnb='jupyter notebook --no-browser --port=9000'
 alias niceplot='php ~/util/niceplots/index.php > ./index.html'
+alias tree='ls -R'
 
 #I'm Stupid
 alias sl='ls'
@@ -16,14 +31,16 @@ alias vmi='vim'
 alias vom='vim'
 alias scd='cd'
 alias kubetl='kubectl'
+alias kubeclt='kubectl'
 alias gept='kubectl get pods -o wide'
 
 # Make CL Readable
 export PS1='[$(date +%H%M)] \[\033[1;30m\]\u@\h\[\e[0m\] \W\$ '
 
 # Kubernetes
-export KUBECONFIG=~/.kube/config.river 
+export KUBECONFIG=~/.kube/config.prp 
 alias getp='kubectl get pods -o wide'
+alias master='kubectl exec -it $(kubectl get pods -l k8s-app=tpc-master -o jsonpath="{.items[0].metadata.name}") -- bash'
 
 # CMSSW
 source /cvmfs/cms.cern.ch/cmsset_default.sh
@@ -77,16 +94,13 @@ export PYTHONSTARTUP=$HOME/.pythonrc
 export EDITOR="vim"
 
 #use files in .local directory for locally installed programs/libraries
-export PATH=$HOME/.local/bin:$HOME/sw/python/bin:$PATH
-export LD_LIBRARY_PATH=$HOME/.local/lib:$HOME/.local/lib64:$HOME/sw/python/lib:$LD_LIBRARY_PATH
+export PATH=$HOME/.local/bin:$PATH
 export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOME/.local/include
-
-export PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig:$HOME/sw/python/lib/pkgconfig
 
 # Custom functions
 function activate {
-  source /home/users/aaarora/pyEnv/$1/bin/activate; 
-  export PATH=/home/users/aaarora/pyEnv/$1/bin/:$PATH;
+  source /home/users/aaarora/pyenv/$1/bin/activate; 
+  export PATH=/home/users/aaarora/pyenv/$1/bin/:$PATH;
 }
 function mvpub {
   mv $1 /home/users/aaarora/public_html/$2;

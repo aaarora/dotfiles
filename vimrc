@@ -6,10 +6,8 @@ set hidden
 
 set noerrorbells visualbell t_vb=
 set t_u7=
-set clipboard=unnamedplus
 
 set backspace=indent,eol,start
-
 set nowrap
 set expandtab
 set tabstop=2
@@ -31,8 +29,9 @@ set nobackup
 set noswapfile
 set noundofile
 
-colorscheme slate
+colorscheme badwolf
 
+" Remap for block-commenting
 vnoremap <silent> # :s/^/#/<cr>:noh<cr>
 vnoremap <silent> -# :s/^#//<cr>:noh<cr>
 
