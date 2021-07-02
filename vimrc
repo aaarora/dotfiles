@@ -29,7 +29,7 @@ set nobackup
 set noswapfile
 set noundofile
 
-colorscheme badwolf
+colorscheme codedark
 
 " Remap for block-commenting
 vnoremap <silent> # :s/^/#/<cr>:noh<cr>
