@@ -1,4 +1,4 @@
-#Source global definitions
+# source global definitions
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
@@ -15,14 +15,15 @@ alias t07='ssh aaarora@test-007.t2.ucsd.edu'
 alias uaf-10='ssh aaarora@uaf-10.t2.ucsd.edu'
 alias uaf-8='ssh aaarora@uaf-8.t2.ucsd.edu'
 alias uaf-7='ssh aaarora@uaf-7.t2.ucsd.edu'
-alias uaf-1='ssh -L 9000:localhost:9000 aaarora@uaf-1.t2.ucsd.edu'
+alias uaf-1='ssh aaarora@uaf-1.t2.ucsd.edu'
 
-#Personal
+# personal
 alias jupnb='jupyter notebook --no-browser --port=9000'
-alias niceplot='php ~/util/niceplots/index.php > ./index.html'
+alias niceplot='php $HOME/util/niceplots/index.php > ./index.html'
 alias tree='ls -R'
+alias usage='ps aux --sort=start_time'
 
-#I'm Stupid
+# i'm stupid
 alias sl='ls'
 alias sclear='clear'
 alias clea='clear'
@@ -34,15 +35,23 @@ alias kubetl='kubectl'
 alias kubeclt='kubectl'
 alias gept='kubectl get pods -o wide'
 
-# Make CL Readable
+# make CL look nicer
 export PS1='[$(date +%H%M)] \[\033[1;30m\]\u@\h\[\e[0m\] \W\$ '
 
-# Kubernetes
-export KUBECONFIG=~/.kube/config.prp 
+# docker
+alias docker-stop-all='docker stop $(docker ps -aq)'
+alias docker-remove-all='docker rm $(docker ps -aq)'
+alias docker-cleanup='docker rm $(docker ps -aq); docker system prune -f --volumes'
+
+# kubernetes
+export KUBECONFIG=~/.kube/config.prp
 alias getp='kubectl get pods -o wide'
 alias master='kubectl exec -it $(kubectl get pods -l k8s-app=tpc-master -o jsonpath="{.items[0].metadata.name}") -- bash'
 
-# CMSSW
+# are you sure?
+alias rm='rm -i'
+
+# cmssw
 source /cvmfs/cms.cern.ch/cmsset_default.sh
 alias cmssw80='cwd=${PWD}; cd /cvmfs/cms.cern.ch/slc6_amd64_gcc530/cms/cmssw/CMSSW_8_0_25/; cmsenv; cd $cwd; echo Now using CMSSW v8.0.25'
 alias cmssw94='cwd=${PWD}; cd /cvmfs/cms.cern.ch/slc6_amd64_gcc630/cms/cmssw/CMSSW_9_4_1/src; cmsenv; cd $cwd; echo Now using CMSSW v9.4.1'
@@ -57,17 +66,17 @@ alias l="ls -lh --color=auto"
 alias ll="ls -lh --color=auto"
 alias lk="ls -lthrGH"
 
-#Fix spelling errors for cd
+# fix spelling errors for cd
 shopt -s cdspell
 
-#Make history more useful
+# make history more useful
 export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 export HISTSIZE=30000
 export HISTFILESIZE=30000
 export HISTTIMEFORMAT='%F %T '
 export HISTCONTROL=ignoredups
 
-#Crab
+# crab
 export GLITE_VERSION="gLite-3.2.11-1"
 export LCG_GFAL_INFOSYS=lcg-bdii.cern.ch:2170
 export GLOBUS_TCP_PORT_RANGE=20000,25000
@@ -85,34 +94,46 @@ if [ ! -f ~/.gitconfig ]; then
   git config --global alias.unstage 'reset HEAD'
 fi
 
+# lang setup
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-#Load Python preferences
+# load python preferences
 export PYTHONSTARTUP=$HOME/.pythonrc
 
+# set default editor for sudoedit
 export EDITOR="vim"
 
-#use files in .local directory for locally installed programs/libraries
+# use files in .local directory for locally installed programs/libraries
 export PATH=$HOME/.local/bin:$PATH
 export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOME/.local/include
 
-# Custom functions
+# custom functions
+# activate python venv
 function activate {
-  source /home/users/aaarora/pyenv/$1/bin/activate; 
-  export PATH=/home/users/aaarora/pyenv/$1/bin/:$PATH;
+  source $HOME/.pyenv/$1/bin/activate; 
+  export PATH=$HOME/.pyenv/$1/bin/:$PATH;
 }
+# mv file/dir to public_html
 function mvpub {
-  mv $1 /home/users/aaarora/public_html/$2;
-  chmod -R 755 /home/users/aaarora/public_html/$2;
+  mv $1 $HOME/public_html/$2;
+  chmod -R 755 $HOME/public_html/$2;
 }
+# change file/dir perm to 755
 function chpub {
   chmod -R 755 $1
 }
+# kubernetes shell exec alias
 function execp {
   if [ -z "$2" ]; then
     kubectl exec -it $1 -- bash
   else
     kubectl exec -it $1 -n $2 -- bash
   fi
+}
+# mv to recycle bin
+function trash {
+if [ -d "$HOME/.trash" ]; then
+  mv "$@" $HOME/.trash
+fi
 }
