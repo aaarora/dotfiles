@@ -109,11 +109,6 @@ export PATH=$HOME/.local/bin:$PATH
 export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOME/.local/include
 
 # custom functions
-# activate python venv
-function activate {
-  source $HOME/.pyenv/$1/bin/activate; 
-  export PATH=$HOME/.pyenv/$1/bin/:$PATH;
-}
 # mv file/dir to public_html
 function mvpub {
   mv $1 $HOME/public_html/$2;
@@ -137,3 +132,18 @@ if [ -d "$HOME/.trash" ]; then
   mv "$@" $HOME/.trash
 fi
 }
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/users/aaarora/.miniconda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/users/aaarora/.miniconda/etc/profile.d/conda.sh" ]; then
+        . "/home/users/aaarora/.miniconda/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/users/aaarora/.miniconda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<

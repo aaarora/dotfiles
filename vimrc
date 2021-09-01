@@ -29,7 +29,7 @@ set nobackup
 set noswapfile
 set noundofile
 
-colorscheme codedark
+colorscheme slate
 
 " Remap for block-commenting
 vnoremap <silent> # :s/^/#/<cr>:noh<cr>
