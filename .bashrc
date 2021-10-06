@@ -35,16 +35,13 @@ alias kubetl='kubectl'
 alias kubeclt='kubectl'
 alias gept='kubectl get pods -o wide'
 
-# make CL look nicer
-export PS1='[$(date +%H%M)] \[\033[1;30m\]\u@\h\[\e[0m\] \W\$ '
-
 # docker
 alias docker-stop-all='docker stop $(docker ps -aq)'
 alias docker-remove-all='docker rm $(docker ps -aq)'
 alias docker-cleanup='docker rm $(docker ps -aq); docker system prune -f --volumes'
 
 # kubernetes
-export KUBECONFIG=~/.kube/config.prp
+export KUBECONFIG=~/.kube/config.river
 alias getp='kubectl get pods -o wide'
 alias master='kubectl exec -it $(kubectl get pods -l k8s-app=tpc-master -o jsonpath="{.items[0].metadata.name}") -- bash'
 
