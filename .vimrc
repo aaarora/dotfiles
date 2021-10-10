@@ -23,6 +23,7 @@ set showmatch
 set number
 
 set incsearch
+set clipboard^=unnamed
 
 set title
 set nobackup
