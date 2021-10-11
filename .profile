@@ -1,7 +1,7 @@
-if [ $SHELL = '/bin/bash' ]; then
-  if [ -f ~/.bashrc ]; then . ~/.bashrc; fi
-elif [ $SHELL = '/bin/zsh' ]; then
-  if [ -f ~/.zshrc ]; then . ~/.zshrc; fi
+if [ -n "$BASH_VERSION" ]; then
+  if [ -f $HOME/.bashrc ]; then . $HOME/.bashrc; fi
+elif [ -n "$ZSH_VERSION" ]; then
+  if [ -f $HOME/.zshrc ]; then . $HOME/.zshrc; fi
 fi
 
 # ssh-agent
