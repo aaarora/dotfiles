@@ -1,13 +1,12 @@
 if [ -n "$BASH_VERSION" ]; then
-  if [ -f $HOME/.bashrc ]; then . $HOME/.bashrc; fi
+  if [ -f "$HOME/.bashrc" ]; then . "$HOME/.bashrc"; fi
 elif [ -n "$ZSH_VERSION" ]; then
-  if [ -f $HOME/.zshrc ]; then . $HOME/.zshrc; fi
+  if [ -f "$HOME/.zshrc" ]; then . "$HOME/.zshrc"; fi
 fi
 
 # ssh-agent
 eval $(ssh-agent -s) &> /dev/null
 find ~/.ssh/ -type f -exec grep -l "PRIVATE" {} \; | xargs ssh-add &> /dev/null
-trap "kill $SSH_AGENT_PID" 0
 
 # ssh aliases
 alias osg-l='ssh aaarora@osg-ligo-1.t2.ucsd.edu'
@@ -42,7 +41,7 @@ alias docker-remove-all='docker rm $(docker ps -aq)'
 alias docker-cleanup='docker rm $(docker ps -aq); docker system prune -f --volumes'
 
 # kubernetes
-export KUBECONFIG=~/.kube/config.river
+export KUBECONFIG=~/.kube/config.dev
 alias getp='kubectl get pods -o wide'
 alias master='kubectl exec -it $(kubectl get pods -l k8s-app=tpc-master -o jsonpath="{.items[0].metadata.name}") -- bash'
 
@@ -61,8 +60,8 @@ alias cmssw11108='cwd=${PWD}; cd /cvmfs/cms.cern.ch/slc7_amd64_gcc820/cms/cmssw/
 
 # ls aliases
 alias l="ls -lh --color=auto"
-alias ll="ls -lh --color=auto"
-alias lk="ls -lthrGH"
+alias ll="ls -lah --color=auto"
+alias lk="ls -lathrGH"
 
 # make history more useful
 export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
@@ -106,6 +105,13 @@ function cppub {
 function chpub {
   chmod -R 755 $1
 }
+
+function kill-all {
+  for i in $(ps aux | grep aaarora | grep $1 | awk '{print $2}'); do
+    kill -9 $i;
+  done
+}
+
 # kubernetes shell exec alias
 function execp {
   if [ -z "$2" ]; then
@@ -120,18 +126,3 @@ if [ -d "$HOME/.trash" ]; then
   mv "$@" $HOME/.trash
 fi
 }
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/users/aaarora/.miniconda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/users/aaarora/.miniconda/etc/profile.d/conda.sh" ]; then
-        . "/home/users/aaarora/.miniconda/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/users/aaarora/.miniconda/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
