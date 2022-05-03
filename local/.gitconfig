@@ -1,0 +1,11 @@
+[user]
+	name = aaarora
+	email = aaarora@ucsd.edu
+[alias]
+	co = checkout
+	ci = commit -a -m
+	pu = push origin master
+	up = pull origin master
+	fe = fetch upstream
+	re = rebase upstream/master
+	unstage = reset HEAD
