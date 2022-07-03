@@ -3,10 +3,6 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-# ssh-agent
-eval $(ssh-agent -s) &> /dev/null
-find ~/.ssh/ -type f -exec grep -l "PRIVATE" {} \; | xargs ssh-add &> /dev/null
-
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
@@ -28,7 +24,7 @@ alias rasp='ssh -p 42000 aashay@pi.aashayarora.com'
 alias killsshfs='sudo umount ~/Work/uaf'
 
 # docker
-alias sandbox='docker run -it sandbox bash'
+alias sandbox='docker run --rm -it sandbox bash'
 alias docker-stop-all='docker stop $(docker ps -aq)'
 alias docker-remove-all='docker rm $(docker ps -aq)'
 alias docker-cleanup='docker rm $(docker ps -aq); docker system prune -f --volumes'
@@ -37,6 +33,8 @@ alias k='kubectl'
 # ls aliases
 alias ls="ls --color=auto"
 alias ll="ls -lh --color=auto"
+
+alias rm="rm -i"
 
 function sshfsuaf {
   sshfs aaarora@uaf-8.t2.ucsd.edu:/home/users/aaarora/$1 /home/aashay/Work/uaf
