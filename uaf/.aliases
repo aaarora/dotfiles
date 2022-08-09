@@ -1,0 +1,45 @@
+# ssh aliases
+alias osg-l='ssh aaarora@osg-ligo-1.t2.ucsd.edu'
+alias t12='ssh aaarora@test-012.t2.ucsd.edu'
+alias t07='ssh aaarora@test-007.t2.ucsd.edu'
+alias uaf10='ssh aaarora@uaf-10.t2.ucsd.edu'
+alias uaf8='ssh aaarora@uaf-8.t2.ucsd.edu'
+alias uaf7='ssh aaarora@uaf-7.t2.ucsd.edu'
+alias uaf1='ssh aaarora@uaf-1.t2.ucsd.edu'
+
+# personal
+alias jupnb='jupyter notebook --no-browser --port=9000'
+alias niceplot='php $HOME/util/niceplots/index.php > ./index.html'
+alias tree='ls -R'
+alias usage='ps aux --cols 200 --sort=start_time | grep aaarora'
+
+# i'm stupid
+alias sl='ls'
+alias sclear='clear'
+alias clea='clear'
+alias rls='ls'
+alias vmi='vim'
+alias vom='vim'
+alias scd='cd'
+
+# docker
+alias sandbox='docker run -it sandbox bash'
+alias docker-stop-all='docker stop $(docker ps -aq)'
+alias docker-remove-all='docker rm $(docker ps -aq)'
+alias docker-cleanup='docker rm $(docker ps -aq); docker system prune -f --volumes'
+
+# kubernetes
+
+alias k='kubectl'
+
+# are you sure?
+alias rm='rm -i'
+
+# cmssw
+alias cmssw10218='source /cvmfs/cms.cern.ch/cmsset_default.sh; cwd=${PWD}; cd /cvmfs/cms.cern.ch/slc6_amd64_gcc700/cms/cmssw/CMSSW_10_2_18/src; cmsenv; cd $cwd; echo Now using CMSSW v10.2.18'
+alias cmssw11108='source /cvmfs/cms.cern.ch/cmsset_default.sh; cwd=${PWD}; cd /cvmfs/cms.cern.ch/slc7_amd64_gcc820/cms/cmssw/CMSSW_11_1_8/src; cmsenv; cd $cwd; echo Now using CMSSW v11.1.08'
+
+# ls aliases
+alias l="ls -lh --color=auto"
+alias ll="ls -lah --color=auto"
+alias lk="ls -lathrGH"
