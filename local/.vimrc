@@ -4,7 +4,7 @@ syntax on
 set nocompatible
 set hidden
 
-set noerrorbells visualbell t_vb=
+set noerrorbells visualbell
 
 set backspace=indent,eol,start
 
