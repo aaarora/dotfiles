@@ -1,0 +1,20 @@
+# docker
+alias sandbox='docker run --rm -it sandbox bash'
+alias docker-stop-all='docker stop $(docker ps -aq)'
+alias docker-remove-all='docker rm $(docker ps -aq)'
+alias docker-cleanup='docker rm $(docker ps -aq); docker system prune -f --volumes'
+
+# kubernetes
+alias k='kubectl'
+
+# ls 
+alias ls="ls --color=auto"
+alias ll="ls -lh --color=auto"
+
+# rm
+alias rm="rm -i"
+
+# grep
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
