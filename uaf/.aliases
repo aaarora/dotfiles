@@ -1,12 +1,3 @@
-# ssh aliases
-alias osg-l='ssh aaarora@osg-ligo-1.t2.ucsd.edu'
-alias t12='ssh aaarora@test-012.t2.ucsd.edu'
-alias t07='ssh aaarora@test-007.t2.ucsd.edu'
-alias uaf10='ssh aaarora@uaf-10.t2.ucsd.edu'
-alias uaf8='ssh aaarora@uaf-8.t2.ucsd.edu'
-alias uaf7='ssh aaarora@uaf-7.t2.ucsd.edu'
-alias uaf1='ssh aaarora@uaf-1.t2.ucsd.edu'
-
 # personal
 alias jupnb='jupyter notebook --no-browser --port=9000'
 alias niceplot='php $HOME/util/niceplots/index.php > ./index.html'
